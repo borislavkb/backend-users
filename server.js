@@ -1,13 +1,16 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const usersRouter = require('./routes/users');
+const dotenv = require("dotenv");
 
+dotenv.config();
 
 const app = express();
 const PORT = 7000; 
 
 
-const DB = "mongodb+srv://borislav:boris123@cluster0.18ukf.mongodb.net/TestDB?retryWrites=true&w=majority";
+const DB = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.18ukf.mongodb.net/TestDB?retryWrites=true&w=majority`;
 
 //Middleware to parse the body of the request to JSON
 app.use(express.json());
@@ -23,6 +26,7 @@ app.get("/", (req, res) => {
     })
 });
 
+app.use("/users", usersRouter)
 
 app.get("/users"), (req, res ) => {
     console.log("Generates users");
