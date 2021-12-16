@@ -10,6 +10,8 @@ const DB = "mongodb+srv://borislav:boris123@cluster0.18ukf.mongodb.net/TestDB?re
 
 //Middleware to parse the body of the request to JSON
 app.use(express.json());
+app.use(cors());
+
 
 //Endpoints 
 
