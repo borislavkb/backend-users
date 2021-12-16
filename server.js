@@ -1,7 +1,12 @@
 const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
 
 const app = express();
 const PORT = 7000; 
+
+
+const DB = "mongodb+srv://borislav:boris123@cluster0.18ukf.mongodb.net/TestDB?retryWrites=true&w=majority";
 
 //Middleware to parse the body of the request to JSON
 app.use(express.json());
@@ -39,7 +44,17 @@ app.delete("/users/:id", (req, res) => {
 
 
 
-//Initiate the server
-app.listen(PORT, () => {
-    console.log(`Listening on http://localhost:${PORT}`)
+//Connect to MongoDB
+
+mongoose.connect(DB, {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+})
+.then(() => {
+    console.log("Connected to MongoDB!")
+    app.listen(PORT, () => 
+    console.log(`Listening on http://localhost:${PORT}`))
+})
+.catch((error) => {
+    console.log(error);
 });
