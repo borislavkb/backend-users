@@ -15,6 +15,30 @@ app.get("/", (req, res) => {
     })
 });
 
+
+app.get("/users"), (req, res ) => {
+    console.log("Generates users");
+}
+
+app.post("/users", (req, res) => {
+    console.log("Inserting new user")
+});
+
+
+app.get("/users/:id", (req, res) => {
+    console.log("Calls a specific user")
+});
+
+app.patch("/users/:id", (req,res) => {
+    console.log("Updates a specific user")
+});
+
+app.delete("/users/:id", (req, res) => {
+    console.log("Deletes a user");
+})
+
+
+
 //Initiate the server
 app.listen(PORT, () => {
     console.log(`Listening on http://localhost:${PORT}`)
