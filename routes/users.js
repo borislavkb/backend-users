@@ -7,6 +7,7 @@ router.get("/", (req, res) => {
     User.find({})
     .then((users) => {
         res.send(users);
+        console.log("Get /")
     })
     .catch(() => {
         res.json({
@@ -19,6 +20,7 @@ router.post("/", (req, res) => {
     User.create(req.body)
       .then((newUser) => {
         res.status(201).send(newUser);
+        console.log("Post /")
       })
       .catch((error) => {
        
@@ -32,9 +34,10 @@ router.get("/:id", (req, res) => {
     User.findById(id)
     .then((user) => {
         if(!user){
-            res.status(404).end();
+            res.status(404).send("No users in DB");
             return;
-        }
+        } res.send(user);
+        
     })
     .catch(() => {
         res.status(500);
@@ -43,6 +46,22 @@ router.get("/:id", (req, res) => {
         });
     });
 });
+
+router.patch("/:id", (req, res) => {
+    const {id} = req.params;
+    User.findByIdAndUpdate(id, req.body, {new: true})
+    .then((updatedUser) => {
+        if(!updatedUser){
+            res.status(404).send("No users in DB");
+            return;
+        }
+        res.send(updatedUser);
+    })
+    .catch((error) => {
+        console.log(error)
+    })
+    });
+
 
 router.delete("/:id", (req, res) => {
     const {id} = req.params;

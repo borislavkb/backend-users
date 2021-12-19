@@ -4,20 +4,11 @@ const { Schema } = mongoose;
 
 const userSchema = new Schema(
     {
-        name: {
-            vorname: String, 
-            nachname: String
-        },
-        geschlecht: {
-            man: String, 
-            woman: String, 
-            divers: String
-        },
-        titel: {
-            Dr : String,
-            Prof: String, 
-            DrProf: String
-        }
+        firstName: String, 
+        secondName: String,
+        gender: String,
+        titel: String,
+        birthDate: String,
     },
         {
             timestamps: true,
