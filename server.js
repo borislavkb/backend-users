@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const usersRouter = require('./routes/users');
 const dotenv = require("dotenv");
+let bodyParser = require('body-parser');
 
 dotenv.config();
 
@@ -16,39 +17,18 @@ const DB = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@
 app.use(express.json());
 app.use(cors());
 
+app.use(bodyParser.json());
+app.use(usersRouter)
 
-app.use("/users", usersRouter)
-app.use("/:id", usersRouter)
-
-//Endpoints 
+//Endpoints
 
 app.get("/", (req, res) => {
     res.json({
         "/users": "read and create new users", 
-        "/users/:id": "read, update and delete an individual user",
+        "/user/:id": "read, update and delete an individual user",
     })
 });
 
-// app.get("/users"), (req, res ) => {
-//     console.log("Generates users");
-// }
-
-// app.post("/users", (req, res) => {
-//     console.log("Inserting new user")
-// });
-
-
-// app.get("/users/:id", (req, res) => {
-//     console.log("Calls a specific user")
-// });
-
-// app.patch("/users/:id", (req,res) => {
-//     console.log("Updates a specific user")
-// });
-
-// app.delete("/users/:id", (req, res) => {
-//     console.log("Deletes a user");
-// })
 
 
 
